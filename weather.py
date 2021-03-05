@@ -2,15 +2,18 @@
 import json
 
 jdata = open('weather.json', 'r')
+old_jdata = open('weather.json.old', 'r')
 load_jdata = json.load(jdata)
+load_old_jdata = json.load(old_jdata)
 
 # print(json.dumps(load_jdata[0]['timeSeries'][0]['areas'][0]['weathers'], ensure_ascii=False))
 today_weather = load_jdata[0]['timeSeries'][0]['areas'][0]['weathers'][0]
 today_wind = load_jdata[0]['timeSeries'][0]['areas'][0]['winds'][0]
 print("今日の天気は", today_weather)
 print("今日の風", today_wind)
-today_temp = load_jdata[0]['timeSeries'][2]['areas'][0]['temps']
-print("今朝の最低気温は", today_temp[0] ," ℃,", "日中の最高気温は", today_temp[1], "℃")
+today_temp_low = load_old_jdata[0]['timeSeries'][2]['areas'][0]['temps'][0]
+today_temp_high = load_jdata[0]['timeSeries'][2]['areas'][0]['temps'][1]
+print("今朝の最低気温は", today_temp_low ," ℃,", "日中の最高気温は", today_temp_high, "℃")
 
 print("")
 # print(json.dumps(today_weather, ensure_ascii=False)[1:-1:])
